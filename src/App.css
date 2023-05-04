@@ -24,9 +24,30 @@
   color: white;
 }
 
+.bg-blue {
+  background-color: blue;
+}
+.bg-pistachio {
+  background-color: #93c572; /* replace with the pistachio color you want to use */
+}
+.bg-lightPistachio {
+    background-image: linear-gradient(79deg,#fcfced, #93c572 60%,#f1fcf7);
+}
+
 .App-link {
   color: #61dafb;
 }
+
+.search-bar-container {
+  /* padding-top: 10vh; */
+  width: 40%;
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+}
+
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +56,6 @@
   to {
     transform: rotate(360deg);
   }
+
+ 
 }
