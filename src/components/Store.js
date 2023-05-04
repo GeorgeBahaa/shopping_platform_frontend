@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row,Col } from 'react-bootstrap';
 import storeItems from "../data/storeItems.json";
 import StoreItem from './StoreItem';
+import SearchBar from './SearchBar';
+import SearchResultsList from './SearchResultsList';
+
 
 const Store = () => {
+
+const [results,setResults] = useState([]);
+
   return (
     <>
     <h1>Store</h1>
+    <div className='search-bar-container'>
+      <SearchBar setResults={setResults} />
+      <SearchResultsList results={results}/>
+    </div>
     <Row md={2} xs={1} lg={3} className='g-3'>
       {storeItems.map((item)=>(
         <Col key={item.id}>
           <StoreItem {...item}/>
-
           
         </Col>
       ))}
