@@ -1,44 +1,63 @@
-import React from 'react'
+import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import formatCurrency from './formatCurrency';
 import { useShoppingCart } from '../context/ShoppingCartContext';
+import { useNavigate } from 'react-router-dom';
+import CartItem from './CartItem';
+
+const StoreItem = ({id,price,title,image}) => {
+    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeItemFromCart } = useShoppingCart();
+    const quantity = getItemQuantity(id);
+    const navigate = useNavigate();
+
+    const handleBuyNowClick = () => {
+        navigate(`/store/${id}`);
+    }
+
+    return (
+        <Card className='h-100'>
+            <Card.Img src={image} variant='top' style={{ height: "200px", objectFit: "cover" }} />
+            <Card.Body>
+                <Card.Title className='d-flex justify-content-between align-items-baseline'>
+                    <span>
+                        {title}
+                    </span>
+
+                    <span className='text-muted me-2'>
+                        {formatCurrency(price)}
+                    </span>
+                </Card.Title>
 
 
-const StoreItem = ({id,price,name,imgUrl}) => {
-    const{getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeItemFromCart}= useShoppingCart();
-    const quantity=getItemQuantity(id);
+                <div className='mt-auto'>
+                    {quantity === 0 ? (
+                        <Button className='w-100' onClick={() => increaseCartQuantity(id)}>Add to Cart</Button>
+                    ) : (
+                        <div className='d-flex align-items-center flex-column' style={{ gap: "0.5rem" }}>
+                            <div className='d-flex align-items-center justify-content-center' style={{ gap: "0.5rem" }}>
 
-  return <Card className='h-100'>
-    <Card.Img src={imgUrl} variant = "top" style={{height : "200px",objectFit:"cover"}} />
-    <Card.Body>
-        <Card.Title className='d-flex justify-content-between align-items-baseline'>
-            <span className='fs-2'>
-                {name}
-            </span>
+                                <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
+                                <span className='fs-3'> {quantity} in cart</span>
+                                <Button onClick={() => increaseCartQuantity(id)}>+</Button>
+                            </div>
+                            <Button variant='danger' size="sm" onClick={() => removeItemFromCart(id)}>Remove</Button>
+                           
+                        </div>
+                    )}
 
-            <span className='text-muted me-2'>
-                {formatCurrency(price)}
-            </span>
-        </Card.Title>
+                    <div className='card-body'>
+                        <Button variant='outline-dark' onClick={handleBuyNowClick}>
+                            Buy Now
+                        </Button>
+                    </div>
 
-
-        <div className='mt-auto'>
-            {quantity===0 ? <Button className='w-100' onClick={()=>increaseCartQuantity(id)}>Add to Cart</Button>: 
-            <div className='d-flex align-items-center flex-column' style={{gap:"0.5rem"}}>   
-                <div className='d-flex align-items-center justify-content-center' style={{gap:"0.5rem"}}>
-                   
-                    <Button onClick={()=>decreaseCartQuantity(id)}>-</Button>
-                    <span className='fs-3'> {quantity} in cart</span>
-                    <Button onClick={()=>increaseCartQuantity(id)}>+</Button>
                 </div>
-                <Button variant='danger' size="sm" onClick={()=>removeItemFromCart(id)}>Remove</Button>
-                </div>}
-        </div>
 
-    </Card.Body>
+            </Card.Body>
 
-    
-  </Card>
+
+        </Card>
+    );
 }
 
 export default StoreItem;
