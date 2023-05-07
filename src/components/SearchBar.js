@@ -5,14 +5,14 @@ import "./SearchBar.css"
 const SearchBar = ({ setResults }) => {
   const [input,setInput]=useState("");
 
-  const fetchData = (value) => {
-        fetch("https://jsonplaceholder.typicode.com/users").then((response) => response.json())
+  const fetchData = async (value)  => {
+         await fetch("http://fakestoreapi.com/products").then((response) => response.json())
         .then(json => {
             const results = json.filter((item)=>{
                 return  (value &&
                      item && 
-                     item.name  &&
-                      item.name.toLowerCase().includes(value)
+                     item.title  &&
+                      item.title.toLowerCase().includes(value)
                       );
             });
             setResults(results);

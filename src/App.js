@@ -7,10 +7,18 @@ import About from "./components/About";
 import Navbar from "./components/Navbar";
 import ShoppingCartProvider from "./context/ShoppingCartContext";
 import Product from "./components/Product";
+import {Login} from './components/Login';
+import {Register} from './components/Register';
+import { useState } from 'react';
+import Profile from "./components/Profile";
   
 
 
 const App = ()=>{
+  const [currentForm, setCurrentForm]= useState('login');
+  const toggleForm = (formName)=>{
+  setCurrentForm(formName);
+  }
   return (
     <ShoppingCartProvider>
     <Navbar/>
@@ -20,6 +28,10 @@ const App = ()=>{
         <Route  exact path="/about" element={<About />} />
         <Route exact path="/store" element={<Store />} />
         <Route exact path="/store/:id" element={<Product />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile/>} />
+
       </Routes>
     </Container>
     </ShoppingCartProvider>

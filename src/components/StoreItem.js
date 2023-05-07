@@ -36,7 +36,7 @@ const StoreItem = ({id,price,title,image}) => {
                         <div className='d-flex align-items-center flex-column' style={{ gap: "0.5rem" }}>
                             <div className='d-flex align-items-center justify-content-center' style={{ gap: "0.5rem" }}>
 
-                                <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
+                                <Button onClick={() => (quantity===1)? removeItemFromCart(id):decreaseCartQuantity(id)}>-</Button>
                                 <span className='fs-3'> {quantity} in cart</span>
                                 <Button onClick={() => increaseCartQuantity(id)}>+</Button>
                             </div>
