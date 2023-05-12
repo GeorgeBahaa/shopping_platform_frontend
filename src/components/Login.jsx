@@ -10,7 +10,11 @@ export const Login = (props)=>{
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(email);
-        navigate('/home');
+        if(location.state?.previousUrl){
+            navigate(location.state.previousUrl);
+        }else{
+            navigate("/");
+        }
         STATUS.isLogged = true;
     }
     // useEffect(() => {

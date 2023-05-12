@@ -31,7 +31,7 @@ const App = ()=>{
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile/>} />
-
+        <Route path="/Checkout" element={<Checkout />} />
       </Routes>
     </Container>
     </ShoppingCartProvider>

@@ -3,6 +3,8 @@ import { Offcanvas, Stack } from 'react-bootstrap';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 import CartItem from './CartItem';
 import formatCurrency from './formatCurrency';
+import storeItems from"../data/storeItems.json";
+import {Link } from "react-router-dom";
 
 const ShoppingCart = ({isOpen}) => {
   const {cartItems,closeCart}= useShoppingCart();
@@ -37,6 +39,12 @@ const ShoppingCart = ({isOpen}) => {
               }, 0)
             )}
           </div>
+          <div className="mx-auto">
+                { cartItems.reduce((total,cartItem) =>{
+                    const item = storeItems.find((i) => i.id === cartItem.id);
+                    return <Link to="/Checkout"><button className="btn btn-outline-dark me-2">Checkout</button></Link>;
+                },null)}
+            </div>
         </Stack>
       </Offcanvas.Body>
     </Offcanvas>
